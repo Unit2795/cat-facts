@@ -15,7 +15,6 @@ const Facts = () => {
 		fetch(`${endpoint}/facts/random?animal_type=cat&amount=10`)
 			.then(response => response.json())
 			.then(data => {
-				// console.log(data);
 				setFacts(data)
 			})
 	}, []);
@@ -23,13 +22,13 @@ const Facts = () => {
     return (
 		<div>
 			<h1>Cat Facts</h1>
-			<ul>
+			<ol>
 				{
-					facts.map((fact, index) => (
+					facts.map((fact) => (
 						<li key={fact._id}>{fact.text}</li>
 					))
 				}
-			</ul>
+			</ol>
 		</div>
 	);
 };
