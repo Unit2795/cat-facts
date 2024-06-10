@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
+import Image from "next/image";
+import Navbar from "@/app/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,11 @@ export default function RootLayout({
   return (
       <html lang="en">
         <body className={inter.className}>
-            <nav>
-                <Link href={"/"}>Home</Link>
-                <Link href={"/facts"}>Facts</Link>
-            </nav>
+            <Navbar/>
             {children}
+            <footer className={'absolute bottom-8 right-8 opacity-20 -z-50'}>
+                <Image src={'/yarn.svg'} alt={"A ball of yarn"} width={800} height={800} />
+            </footer>
         </body>
       </html>
   );

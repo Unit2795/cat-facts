@@ -1,7 +1,6 @@
 'use client'
 
 import {useEffect, useState } from "react";
-import {endpoint} from "@/app/page";
 
 type CatFacts = {
 	_id: string;
@@ -9,7 +8,7 @@ type CatFacts = {
 }
 
 const Facts = () => {
-	const [facts, setFacts] = useState<CatFacts[]>([]);
+	/*const [facts, setFacts] = useState<CatFacts[]>([]);
 
 	useEffect(() => {
 		fetch(`${endpoint}/facts/random?animal_type=cat&amount=10`)
@@ -17,18 +16,18 @@ const Facts = () => {
 			.then(data => {
 				setFacts(data)
 			})
-	}, []);
+	}, []);*/
 
     return (
 		<div>
 			<h1>Cat Facts</h1>
-			<ol>
+			{/*<ol>
 				{
 					facts.map((fact) => (
 						<li key={fact._id}>{fact.text}</li>
 					))
 				}
-			</ol>
+			</ol>*/}
 		</div>
 	);
 };

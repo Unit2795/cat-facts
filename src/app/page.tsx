@@ -9,13 +9,13 @@ export default function Home() {
 
 	return (
 		<div>
-			<button onClick={() => {
+			{/*<button onClick={() => {
 				fetch(`${endpoint}/facts/random`)
 					.then(response => response.json())
 					.then(data => {
 						setFact(data.text)
 					})
-			}}>Get Random Cat Fact</button>
+			}}>Get Random Cat Fact</button>*/}
 
 			{
 				fact && (
