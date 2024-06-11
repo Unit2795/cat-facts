@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import "./slider.css"
 import clsx from "clsx";
+import {usePrefersReducedMotion} from "@/lib/reduced-motion";
 
 const TextSlider = (
 	{
@@ -9,14 +10,18 @@ const TextSlider = (
 		text: string
 	}
 ) => {
+	const prefersReducedMotion = usePrefersReducedMotion();
 	const [currentText, setCurrentText] = useState<string>("");
 	const [animation, setAnimation] = useState('');
 
 	useEffect(() => {
+		if (prefersReducedMotion) {
+			setCurrentText(text);
+		}
 		/* If loading in the text slider for the first time or with empty content, just set the text and animate in
 			immediately as opposed to wasting time animating out an empty string
 		 */
-		if (currentText === "")
+		else if (currentText === "")
 		{
 			setCurrentText(text);
 			setAnimation('slide-in');
