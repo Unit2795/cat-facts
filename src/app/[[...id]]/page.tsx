@@ -7,7 +7,6 @@ import clsx from "clsx";
 import { useRouter } from 'next/navigation'
 
 export default function Home({ params }: { params: { id: string } }) {
-	const router = useRouter();
 	const [fact, setFact] = useState({
 		next: "",
 		current: ""

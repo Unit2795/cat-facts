@@ -2,11 +2,6 @@
 
 import {useEffect, useState } from "react";
 
-type CatFacts = {
-	_id: string;
-	text: string;
-}
-
 const Facts = () => {
 	/*const [facts, setFacts] = useState<CatFacts[]>([]);
 
