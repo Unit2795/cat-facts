@@ -1,3 +1,8 @@
+.fade {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1; /* Start fully visible */
+}
+
 .nav-item {
     position: relative;
     padding: 10px 20px;
@@ -23,7 +28,7 @@
 .nav-content::before
 {
     position: absolute;
-    left: -20px;
+    right: 0;
     content: "";
     z-index: 1;
     border-top: 70px solid transparent;

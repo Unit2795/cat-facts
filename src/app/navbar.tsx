@@ -45,10 +45,10 @@ export const Navbar = () => {
 
     return (
 		<nav className="flex justify-between items-center overflow-hidden bg-stone-900 border-t-rose-800 border-t-2">
-			<Link href={"/"} className={"bg-rose-800 px-6"}>
+			<Link href={"/"} className={"bg-rose-800 pl-2 pr-6 nav-content relative"}>
 				<PeekCat height={64} width={64}/>
 			</Link>
-			<div className={"flex-grow flex justify-center gap-6 relative nav-content self-stretch"}>
+			<div className={"flex-grow flex justify-center gap-6 relative"}>
 				<Link ref={homeRef} href={"/"} className={"nav-item"}>
 					Home
 				</Link>

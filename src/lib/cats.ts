@@ -10,9 +10,9 @@ type CatFact = {
 	sentCount: number
 }
 
-class CatAPI {
+export class CatAPI {
 	// Get a cat fact (random or as specified by an ID) and return the JSON response
-	async getFact(id?: string): Promise<CatFact | null> {
+	static async getFact(id?: string): Promise<CatFact | null> {
 		try {
 			const result = await fetch(`${endpoint}/facts/${id || "random"}`);
 			return await result.json();
@@ -23,7 +23,7 @@ class CatAPI {
 	}
 
 	// Get a list of N cat facts and return the JSON response
-	async getFacts(amount: number = 10): Promise<CatFact[] | null> {
+	static async getFacts(amount: number = 10): Promise<CatFact[] | null> {
 		try {
 			const result = await fetch(`${endpoint}/facts/random?animal_type=cat&amount=${amount}`);
 			return await result.json();
