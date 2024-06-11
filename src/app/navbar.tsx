@@ -16,10 +16,11 @@ export const Navbar = () => {
 	useEffect(() => {
 		let newStyle = undefined;
 
-		if (path === '/' && homeRef.current) {
-			newStyle = homeRef.current.offsetLeft;
-		} else if (path === '/facts' && factsRef.current) {
+		if (path === '/facts' && factsRef.current) {
 			newStyle = factsRef.current.offsetLeft;
+		}
+		else if (homeRef.current) {
+			newStyle = homeRef.current.offsetLeft;
 		}
 		else
 			newStyle = undefined;

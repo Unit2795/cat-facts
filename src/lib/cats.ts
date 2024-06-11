@@ -7,7 +7,7 @@ type CatFact = {
 
 export class CatAPI {
 	// Get a cat fact (random or as specified by an ID) and return the JSON response
-	static async getFact(id?: string): Promise<CatFact | null> {
+	static async getFact(id?: number): Promise<CatFact | null> {
 		try {
 			const result = await fetch(`${endpoint}${id ? '?id=' + id : ''}`);
 			const {data} = await result.json();

@@ -4,8 +4,10 @@ import Refresh from '@/assets/refresh-cw.svg';
 import {useEffect, useRef, useState} from "react";
 import {CatAPI} from "@/lib/cats";
 import clsx from "clsx";
+import { useRouter } from 'next/navigation'
 
-export default function Home() {
+export default function Home({ params }: { params: { id: string } }) {
+	const router = useRouter();
 	const [fact, setFact] = useState({
 		next: "",
 		current: ""
@@ -18,10 +20,10 @@ export default function Home() {
 	const isLoading = useRef(false);
 
 	// Fetch a new fact, set the loading status, and start the spinner animation
-	const newFact = () => {
+	const newFact = (id?: number) => {
 		isLoading.current = true;
 		setSpinnerRotation(true)
-		CatAPI.getFact()
+		CatAPI.getFact(id)
 			.then((result) => {
 				setFact(prevState => {
 					return {
@@ -29,6 +31,10 @@ export default function Home() {
 						next: result?.text || ""
 					};
 				})
+
+				if (result && result._id) {
+					window.history.replaceState(null, "", `/${result._id}`);
+				}
 			})
 			.finally(() => {
 				isLoading.current = false;
@@ -37,7 +43,8 @@ export default function Home() {
 
 	// Fetch new fact on load
 	useEffect(() => {
-		newFact();
+		const searchId = parseInt(params.id);
+		newFact(searchId || undefined);
 	}, []);
 
 	/*
