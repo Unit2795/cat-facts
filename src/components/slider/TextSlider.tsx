@@ -6,14 +6,22 @@ const TextSlider = (
 	{
 		text
 	}: {
-		text?: string
+		text: string
 	}
 ) => {
-	const [currentText, setCurrentText] = useState(text);
+	const [currentText, setCurrentText] = useState<string>("");
 	const [animation, setAnimation] = useState('');
 
 	useEffect(() => {
-		if (text !== currentText) {
+		/* If loading in the text slider for the first time or with empty content, just set the text and animate in
+			immediately as opposed to wasting time animating out an empty string
+		 */
+		if (currentText === "")
+		{
+			setCurrentText(text);
+			setAnimation('slide-in');
+		}
+		else if (text !== currentText) {
 			setAnimation('slide-out');
 			setTimeout(() => {
 				setCurrentText(text);
