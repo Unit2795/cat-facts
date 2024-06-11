@@ -1,12 +1,6 @@
-'use client'
-
-import { useState } from "react";
 import Link from "next/link";
 
 export default function Home() {
-	const [fact, setFact] = useState<string>("");
-
-
 	return (
 		<div>
 			{/*<button onClick={() => {
@@ -17,11 +11,6 @@ export default function Home() {
 					})
 			}}>Get Random Cat Fact</button>*/}
 
-			{
-				fact && (
-					<p>{fact}</p>
-				)
-			}
 
 			<Link href={"/facts"}><p>Get a list of cat facts here!</p></Link>
 		</div>

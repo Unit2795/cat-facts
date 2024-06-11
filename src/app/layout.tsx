@@ -1,10 +1,13 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import Image from "next/image";
 import Navbar from "@/app/navbar";
+import Yarn from '@/assets/yarn.svg';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+    subsets: ["latin"]
+});
 
 export const metadata: Metadata = {
   title: "LCM Cat Facts",
@@ -21,8 +24,8 @@ export default function RootLayout({
         <body className={inter.className}>
             <Navbar/>
             {children}
-            <footer className={'absolute bottom-8 right-8 opacity-20 -z-50'}>
-                <Image src={'/yarn.svg'} alt={"A ball of yarn"} width={800} height={800} />
+            <footer className={'absolute ml-8 bottom-8 right-8 opacity-20 -z-50'}>
+                <Yarn width={800} />
             </footer>
         </body>
       </html>

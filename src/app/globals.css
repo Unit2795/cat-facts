@@ -6,3 +6,9 @@ body
 {
     @apply bg-stone-800 text-stone-100;
 }
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
