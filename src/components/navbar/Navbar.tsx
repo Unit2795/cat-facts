@@ -32,7 +32,7 @@ const Navbar = (
 	}, [path, links]);
 
     return (
-		<div className={"fixed h-16 w-full flex bg-stone-900"}>
+		<div className={"fixed h-16 w-full flex bg-stone-900 z-10"}>
 			<Link href={"/"} className={"px-6"}>
 				{image}
 			</Link>

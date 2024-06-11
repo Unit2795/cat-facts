@@ -72,7 +72,7 @@ export default function Home({ params }: { params: { id: string } }) {
 						<Refresh className={clsx("ml-2", spinnerRotation && "animate-spin")}/>
 					</button>
 				</div>
-				<TextSlider text={fact} />
+				<TextSlider text={fact}/>
 			</div>
 		</div>
 	);
