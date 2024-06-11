@@ -8,43 +8,38 @@ type CatFact = {
 export class CatAPI {
 	static controller = new AbortController();
 
-	// Get a cat fact (random or as specified by an ID) and return the JSON response
-	static async getFact(id?: number): Promise<CatFact | null> {
+	private static async fetchData<T>(url: string): Promise<T | null> {
 		try {
-			// Abort any ongoing request
+			// Abort any ongoing request and create a new controller for the new request
 			this.controller.abort();
-
-			// Create a new controller for the new request
 			this.controller = new AbortController();
 			const signal = this.controller.signal;
 
-			const response = await fetch(`${endpoint}/fact${id ? '?id=' + id : ''}`, {signal});
+			const response = await fetch(url, { signal });
+			if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-			if (!response.ok)
-				return null;
-
-			const {data} = await response.json();
-
-			return data || null;
-		} catch (error) {
-			console.error(error);
+			const json = await response.json();
+			return json.data || null;
+		} catch (e) {
+			const error = e as Error;
+			if (error?.name === 'AbortError') {
+				console.debug('Fetch aborted');
+			} else {
+				console.error('Fetch error:', error);
+			}
 			return null;
 		}
 	}
 
-	// Get a list of N cat facts and return the JSON response
-	static async getFacts({signal, amount = 10}: {amount: number, signal?: AbortSignal}): Promise<CatFact[] | null> {
-		try {
-			const result = await fetch(`${endpoint}/facts?&amount=${amount}`, {signal});
-			const {data} = await result.json();
+	// Get a cat fact (random or as specified by an ID) and return the JSON response
+	static getFact(id?: number): Promise<CatFact | null> {
+		const url = `${endpoint}/fact${id ? '?id=' + id : ''}`;
+		return this.fetchData<CatFact>(url);
+	}
 
-			if (!data)
-				return null;
-			else
-				return data;
-		} catch (error) {
-			console.error(error);
-			return null;
-		}
+	// Get a list of N cat facts and return the JSON response
+	static getFacts(amount: number = 10): Promise<CatFact[] | null> {
+		const url = `${endpoint}/facts?amount=${amount}`;
+		return this.fetchData<CatFact[]>(url);
 	}
 }
