@@ -16,10 +16,10 @@ export default function Home({ params }: { params: { id: string } }) {
 	const isLoading = useRef(false);
 
 	// Fetch a new fact, set the loading status, and start the spinner animation
-	const newFact = (signal: AbortSignal, id?: number) => {
+	const newFact = (id?: number) => {
 		isLoading.current = true;
 		setSpinnerRotation(true)
-		CatAPI.getFact({signal, id})
+		CatAPI.getFact(id)
 			.then((result) => {
 				setFact(result?.text || "")
 
@@ -34,13 +34,8 @@ export default function Home({ params }: { params: { id: string } }) {
 
 	// Fetch new fact on load
 	useEffect(() => {
-		const controller = new AbortController();
 		const searchId = parseInt(params.id);
-		newFact(controller.signal, searchId || undefined);
-
-		return () => {
-			controller.abort();
-		};
+		newFact(searchId || undefined);
 	}, []);
 
 	/*

@@ -6,16 +6,26 @@ type CatFact = {
 }
 
 export class CatAPI {
-	// Get a cat fact (random or as specified by an ID) and return the JSON response
-	static async getFact({signal, id}: {signal?: AbortSignal, id?: number}): Promise<CatFact | null> {
-		try {
-			const result = await fetch(`${endpoint}/fact${id ? '?id=' + id : ''}`, {signal});
-			const {data} = await result.json();
+	static controller = new AbortController();
 
-			if (!data)
+	// Get a cat fact (random or as specified by an ID) and return the JSON response
+	static async getFact(id?: number): Promise<CatFact | null> {
+		try {
+			// Abort any ongoing request
+			this.controller.abort();
+
+			// Create a new controller for the new request
+			this.controller = new AbortController();
+			const signal = this.controller.signal;
+
+			const response = await fetch(`${endpoint}/fact${id ? '?id=' + id : ''}`, {signal});
+
+			if (!response.ok)
 				return null;
-			else
-				return data;
+
+			const {data} = await response.json();
+
+			return data || null;
 		} catch (error) {
 			console.error(error);
 			return null;
