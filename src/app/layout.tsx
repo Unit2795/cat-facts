@@ -1,9 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "@/app/navbar";
 import Yarn from '@/assets/yarn.svg';
 import clsx from "clsx";
+import Navbar from "@/components/navbar/Navbar";
+import PeekCat from "@/assets/peekcat.svg";
 
 const inter = Inter({
     subsets: ["latin"]
@@ -22,9 +23,19 @@ export default function RootLayout(
     }>
 ) {
     return (
-        <html lang="en" className={"min-h-screen"}>
-            <body className={clsx(inter.className, "min-h-screen flex flex-col relative")}>
-                <Navbar/>
+        <html lang="en">
+            <body className={clsx(inter.className)}>
+                <Navbar image={<PeekCat width={64}/>} links={[
+                    {
+                        href: "/",
+                        text: "Home"
+                    },
+                    {
+                        href: "/facts",
+                        text: "Facts"
+                    }
+                ]}/>
+                {/*<Navbar/>*/}
                 <div className={'pt-16'}/>
                 {children}
                 <footer className={'fixed ml-8 bottom-8 right-8 opacity-20 -z-50'}>
