@@ -5,6 +5,8 @@ import Yarn from '@/assets/yarn.svg';
 import clsx from "clsx";
 import Navbar from "@/components/navbar/Navbar";
 import PeekCat from "@/assets/peekcat.svg";
+import {ReactNode} from "react";
+import "./layout.css";
 
 const inter = Inter({
     subsets: ["latin"]
@@ -19,13 +21,13 @@ export default function RootLayout(
     {
         children
     }: Readonly<{
-        children: React.ReactNode;
+        children: ReactNode;
     }>
 ) {
     return (
         <html lang="en">
             <body className={clsx(inter.className)}>
-                <Navbar image={<PeekCat width={64} height={64} className={"text-rose-800"}/>} links={[
+                <Navbar image={<PeekCat width={64} className={"text-rose-800 cat-squish"}/>} links={[
                     {
                         href: "/",
                         text: "Home",

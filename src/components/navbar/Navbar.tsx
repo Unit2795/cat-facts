@@ -33,10 +33,7 @@ const Navbar = (
 
     return (
 		<div className={"fixed h-16 w-full flex bg-stone-900 z-10"}>
-			<Link href={"/"} className={"px-6"}>
-				{image}
-			</Link>
-			<div className={"flex justify-center items-center pl-6"}>
+			<div className={"flex justify-center items-center"}>
 				{
 					links.map((item, index) => {
 						const isActive = path === item.href || defaultActive === index;
@@ -49,6 +46,10 @@ const Navbar = (
 					})
 				}
 			</div>
+			<div className={"flex-grow"}/>
+			<Link href={"/"} className={"px-6 flex items-end"}>
+				{image}
+			</Link>
 		</div>
 	);
 };
