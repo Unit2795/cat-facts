@@ -1,20 +1,20 @@
 import { type NextRequest } from 'next/server'
-import {getFact, getFacts} from "@/lib/facts";
+import {getFact} from "@/lib/facts";
 
 export const GET = async (request: NextRequest) => {
 	const params = request.nextUrl.searchParams;
-	const incomingAmount = params.get('amount');
-	const parsedAmount = parseInt(incomingAmount || '');
+	const incomingID = params.get('id');
+	const parsedID = parseInt(incomingID || '');
 
-	const facts = getFacts(parsedAmount || undefined);
+	const fact = getFact(parsedID || undefined);
 
-	if (!facts) {
+	if (!fact) {
 		return new Response("No fact found", {
 			status: 404,
 		})
 	}
 
 	return Response.json({
-		data: facts
+		data: fact
 	})
 };
