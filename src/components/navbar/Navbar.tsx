@@ -8,7 +8,8 @@ import {usePathname} from "next/navigation";
 export type LinkItem = {
 	href: string,
 	text: string,
-	default?: boolean
+	ariaLabel: string
+	default?: boolean,
 }
 
 const Navbar = (
@@ -39,7 +40,7 @@ const Navbar = (
 						const isActive = path === item.href || defaultActive === index;
 
 						return (
-							<Link key={item.href} href={item.href} className={clsx(isActive && "bg-rose-800", "h-16 px-8 hover:bg-rose-900 flex items-center transition duration-200")}>
+							<Link aria-label={item.ariaLabel} key={item.href} href={item.href} className={clsx(isActive && "bg-rose-800", "h-16 px-8 hover:bg-rose-900 flex items-center transition duration-200")}>
 								<span>{item.text}</span>
 							</Link>
 						)
@@ -47,7 +48,7 @@ const Navbar = (
 				}
 			</div>
 			<div className={"flex-grow"}/>
-			<Link href={"/"} className={"px-6 flex items-end"}>
+			<Link href={"/"} className={"px-6 flex items-end"} aria-label={"Return to the homepage"}>
 				{image}
 			</Link>
 		</div>

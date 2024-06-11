@@ -27,21 +27,23 @@ export default function RootLayout(
     return (
         <html lang="en">
             <body className={clsx(inter.className)}>
-                <Navbar image={<PeekCat width={64} className={"text-rose-800 cat-squish"}/>} links={[
+                <Navbar image={<PeekCat width={64} className={"text-rose-800 cat-squish"} alt={"Icon of a cat peeking over a surface curiously"}/>} links={[
                     {
                         href: "/",
                         text: "Home",
-                        default: true
+                        default: true,
+                        ariaLabel: "Return to the homepage"
                     },
                     {
                         href: "/facts",
-                        text: "Facts"
+                        text: "Facts",
+                        ariaLabel: "See a list of random cat facts"
                     }
                 ]}/>
                 <div className={'pt-16'}/>
                 {children}
                 <footer className={'fixed ml-8 bottom-8 right-8 opacity-20 -z-50'}>
-                    <Yarn width={600} className={"max-w-full"} />
+                    <Yarn width={600} className={"max-w-full"} alt={"Ball of yarn with a small piece trailing off"}/>
                 </footer>
             </body>
         </html>

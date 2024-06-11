@@ -6,6 +6,7 @@ import {CatAPI} from "@/lib/cats";
 import clsx from "clsx";
 import './slider.css';
 import TextSlider from "@/components/slider/TextSlider";
+import Link from "next/link";
 
 export default function Home({ params }: { params: { id: string } }) {
 	const [fact, setFact] = useState("");
@@ -62,13 +63,16 @@ export default function Home({ params }: { params: { id: string } }) {
 
 	return (
 		<div className={'py-16 flex flex-col flex-grow'}>
+			<div className={"text-center pb-16"}>
+				Welcome to your one stop shop for cool cat facts! Generate a new fact below, or <Link href={"/facts"} className={"text-blue-400 hover:text-blue-500 transition duration-200"} aria-label={"See a list of random cat facts"}>see a list of random facts by visiting the facts page.</Link>
+			</div>
 			<div className={"min-h-full flex-grow flex flex-col overflow-hidden"}>
 				<div className={"pb-16"}>
 					<button className={"btn-primary flex mx-auto"} onClick={() => {
 						newFact();
 					}}>
 						Generate New Cat Fact!
-						<Refresh className={clsx("ml-2", spinnerRotation && "animate-spin")}/>
+						<Refresh className={clsx("ml-2", spinnerRotation && "animate-spin")} alt={"Refresh indicator, two arrows shaped in a circle, pointing clockwise"}/>
 					</button>
 				</div>
 				<TextSlider text={fact}/>
