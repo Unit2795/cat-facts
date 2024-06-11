@@ -1,0 +1,29 @@
+/*Slide In/Out Animation Logic*/
+.text-slider {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    display: flex;
+    min-height: 100%;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+@keyframes slide-out {
+    from { transform: translateX(0); }
+    to { transform: translateX(100vw); }
+}
+
+@keyframes slide-in {
+    from { transform: translateX(-100vw); }
+    to { transform: translateX(0); }
+}
+
+.text-out {
+    animation: slide-out 0.5s forwards; /* Ensures the element stays at the end state */
+}
+
+.text-in {
+    position: absolute;
+    animation: slide-in 0.5s forwards;
+}

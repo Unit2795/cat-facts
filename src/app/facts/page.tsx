@@ -1,7 +1,5 @@
 'use client'
 
-import {useEffect, useState } from "react";
-
 const Facts = () => {
 	/*const [facts, setFacts] = useState<CatFacts[]>([]);
 

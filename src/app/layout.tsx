@@ -25,17 +25,17 @@ export default function RootLayout(
     return (
         <html lang="en">
             <body className={clsx(inter.className)}>
-                <Navbar image={<PeekCat width={64}/>} links={[
+                <Navbar image={<PeekCat width={64} height={64} className={"text-rose-800"}/>} links={[
                     {
                         href: "/",
-                        text: "Home"
+                        text: "Home",
+                        default: true
                     },
                     {
                         href: "/facts",
                         text: "Facts"
                     }
                 ]}/>
-                {/*<Navbar/>*/}
                 <div className={'pt-16'}/>
                 {children}
                 <footer className={'fixed ml-8 bottom-8 right-8 opacity-20 -z-50'}>

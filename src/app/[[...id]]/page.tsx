@@ -4,7 +4,7 @@ import Refresh from '@/assets/refresh-cw.svg';
 import {useEffect, useRef, useState} from "react";
 import {CatAPI} from "@/lib/cats";
 import clsx from "clsx";
-import { useRouter } from 'next/navigation'
+import './slider.css';
 
 export default function Home({ params }: { params: { id: string } }) {
 	const [fact, setFact] = useState({
