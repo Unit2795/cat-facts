@@ -49,7 +49,7 @@ export const Navbar = () => {
 			<Link href={"/"} className={"bg-rose-800 pl-2 pr-6 nav-content relative"}>
 				<PeekCat height={64} width={64}/>
 			</Link>
-			<div className={"flex-grow flex justify-center gap-6 relative"}>
+			<div className={"flex-grow flex gap-6 pl-8"}>
 				<Link ref={homeRef} href={"/"} className={"nav-item"}>
 					Home
 				</Link>
