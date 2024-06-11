@@ -66,7 +66,7 @@ const Facts = () => {
 			<ol className={"list-decimal px-12 max-w-[600px] mx-auto"}>
 				{
 					facts.map((fact) => (
-						<li key={fact._id} className={"my-6 hover:text-blue-500 transition"}><Link href={`/${fact._id}`} target={"_blank"}>{fact.text}</Link></li>
+						<li key={fact._id} className={"my-6"}><Link href={`/${fact._id}`} target={"_blank"} className={"hover:text-blue-500 transition"}>{fact.text}</Link></li>
 					))
 				}
 			</ol>
