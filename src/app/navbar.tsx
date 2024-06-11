@@ -44,7 +44,7 @@ export const Navbar = () => {
 	}, []);
 
     return (
-		<nav className="flex justify-between items-center overflow-hidden bg-stone-900 border-t-rose-800 border-t-2">
+		<nav className="flex justify-between items-center overflow-hidden bg-stone-900 border-t-rose-800 border-t-2 fixed top-0 w-full z-10">
 			<Link href={"/"} className={"bg-rose-800 pl-2 pr-6 nav-content relative"}>
 				<PeekCat height={64} width={64}/>
 			</Link>

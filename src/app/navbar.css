@@ -1,8 +1,3 @@
-.fade {
-    transition: opacity 0.5s ease-in-out;
-    opacity: 1; /* Start fully visible */
-}
-
 .nav-item {
     position: relative;
     padding: 10px 20px;
@@ -33,4 +28,34 @@
     z-index: 1;
     border-top: 70px solid transparent;
     border-right: 20px solid #1c1917;
+}
+
+/*Slide In/Out Animation Logic*/
+.text-slider {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    display: flex;
+    min-height: 100%;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+@keyframes slide-out {
+    from { transform: translateX(0); }
+    to { transform: translateX(100vw); }
+}
+
+@keyframes slide-in {
+    from { transform: translateX(-100vw); }
+    to { transform: translateX(0); }
+}
+
+.text-out {
+    animation: slide-out 0.5s forwards; /* Ensures the element stays at the end state */
+}
+
+.text-in {
+    position: absolute;
+    animation: slide-in 0.5s forwards;
 }

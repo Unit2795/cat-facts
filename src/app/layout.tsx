@@ -25,6 +25,7 @@ export default function RootLayout(
         <html lang="en" className={"min-h-screen"}>
             <body className={clsx(inter.className, "min-h-screen flex flex-col relative")}>
                 <Navbar/>
+                <div className={'pt-16'}/>
                 {children}
                 <footer className={'fixed ml-8 bottom-8 right-8 opacity-20 -z-50'}>
                     <Yarn width={600} className={"max-w-full"} />
