@@ -10,17 +10,16 @@ import TextSlider from "@/components/slider/TextSlider";
 export default function Home({ params }: { params: { id: string } }) {
 	const [fact, setFact] = useState("");
 	const [spinnerRotation, setSpinnerRotation] = useState(false);
-	const textContainer = useRef<HTMLDivElement>(null);
 	/* Mutable ref so we can track loading status inside the setInternal closure
 		(which would otherwise just capture the state value at the time of invocation)
 	 */
 	const isLoading = useRef(false);
 
 	// Fetch a new fact, set the loading status, and start the spinner animation
-	const newFact = (id?: number) => {
+	const newFact = (signal: AbortSignal, id?: number) => {
 		isLoading.current = true;
 		setSpinnerRotation(true)
-		CatAPI.getFact(id)
+		CatAPI.getFact({signal, id})
 			.then((result) => {
 				setFact(result?.text || "")
 
@@ -35,8 +34,13 @@ export default function Home({ params }: { params: { id: string } }) {
 
 	// Fetch new fact on load
 	useEffect(() => {
+		const controller = new AbortController();
 		const searchId = parseInt(params.id);
-		newFact(searchId || undefined);
+		newFact(controller.signal, searchId || undefined);
+
+		return () => {
+			controller.abort();
+		};
 	}, []);
 
 	/*

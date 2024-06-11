@@ -7,9 +7,9 @@ type CatFact = {
 
 export class CatAPI {
 	// Get a cat fact (random or as specified by an ID) and return the JSON response
-	static async getFact(id?: number): Promise<CatFact | null> {
+	static async getFact({signal, id}: {signal?: AbortSignal, id?: number}): Promise<CatFact | null> {
 		try {
-			const result = await fetch(`${endpoint}/fact${id ? '?id=' + id : ''}`);
+			const result = await fetch(`${endpoint}/fact${id ? '?id=' + id : ''}`, {signal});
 			const {data} = await result.json();
 
 			if (!data)
@@ -23,9 +23,9 @@ export class CatAPI {
 	}
 
 	// Get a list of N cat facts and return the JSON response
-	static async getFacts(amount: number = 10): Promise<CatFact[] | null> {
+	static async getFacts({signal, amount = 10}: {amount: number, signal?: AbortSignal}): Promise<CatFact[] | null> {
 		try {
-			const result = await fetch(`${endpoint}/facts?&amount=${amount}`);
+			const result = await fetch(`${endpoint}/facts?&amount=${amount}`, {signal});
 			const {data} = await result.json();
 
 			if (!data)
