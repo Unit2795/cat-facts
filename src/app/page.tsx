@@ -10,22 +10,57 @@ export default function Home() {
 		next: "",
 		current: ""
 	});
+	const [spinnerRotation, setSpinnerRotation] = useState(false);
 	const textContainer = useRef<HTMLDivElement>(null);
+	/* Mutable ref so we can track loading status inside the setInternal closure
+		(which would otherwise just capture the state value at the time of invocation)
+	 */
+	const isLoading = useRef(false);
 
+	// Fetch a new fact, set the loading status, and start the spinner animation
 	const newFact = () => {
-		CatAPI.getFact().then((result) => {
-			setFact(prevState => {
-				return {
-					...prevState,
-					next: result?.text || ""
-				};
+		isLoading.current = true;
+		setSpinnerRotation(true)
+		CatAPI.getFact()
+			.then((result) => {
+				setFact(prevState => {
+					return {
+						...prevState,
+						next: result?.text || ""
+					};
+				})
 			})
-		});
+			.finally(() => {
+				isLoading.current = false;
+			});
 	};
 
+	// Fetch new fact on load
 	useEffect(() => {
 		newFact();
 	}, []);
+
+	/*
+		Ensure spinner completes at least 1 full rotation, then evaluate if we are still loading, then either continue
+		rotating or remove the rotation animation
+	*/
+	useEffect(() => {
+		const checkLoading = () => {
+			if (!isLoading.current) {
+				setSpinnerRotation(false);
+				clearInterval(intervalId);
+			}
+		};
+
+		let intervalId: NodeJS.Timeout;
+		if (spinnerRotation) {
+			intervalId = setInterval(checkLoading, 1000); // Check every 1000ms
+		}
+
+		return () => {
+			clearInterval(intervalId);
+		};
+	}, [spinnerRotation]);
 
 	useEffect(() => {
 		if (fact.next !== '') {
@@ -47,17 +82,14 @@ export default function Home() {
 					<button className={"btn-primary flex mx-auto"} onClick={() => {
 						newFact();
 					}}>
-						Generate Cat Fact!
-						<Refresh className={"ml-2 animate-spin"}/>
+						Generate New Cat Fact!
+						<Refresh className={clsx("ml-2", spinnerRotation && "animate-spin")}/>
 					</button>
 				</div>
 				<div className={"text-slider"} ref={textContainer}>
-					{fact.current && <span className={clsx(fact.next && "text-out", "max-w-96 break-words")}>{fact.current}</span>}
-					{fact.next && <span className="text-in max-w-96 break-words">{fact.next}</span>}
+					{fact.current && <span className={clsx(fact.next && "text-out", "max-w-96 break-words text-xl leading-10")}>{fact.current}</span>}
+					{fact.next && <span className="text-in max-w-96 break-words text-xl leading-10">{fact.next}</span>}
 				</div>
-				{/*<div className={"text-center pt-16 text-xl px-8 max-w-96 mx-auto"}>
-					{fact}
-				</div>*/}
 			</div>
 		</div>
 	);
