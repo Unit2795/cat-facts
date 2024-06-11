@@ -5,12 +5,10 @@ import {useEffect, useRef, useState} from "react";
 import {CatAPI} from "@/lib/cats";
 import clsx from "clsx";
 import './slider.css';
+import TextSlider from "@/components/slider/TextSlider";
 
 export default function Home({ params }: { params: { id: string } }) {
-	const [fact, setFact] = useState({
-		next: "",
-		current: ""
-	});
+	const [fact, setFact] = useState("");
 	const [spinnerRotation, setSpinnerRotation] = useState(false);
 	const textContainer = useRef<HTMLDivElement>(null);
 	/* Mutable ref so we can track loading status inside the setInternal closure
@@ -24,12 +22,7 @@ export default function Home({ params }: { params: { id: string } }) {
 		setSpinnerRotation(true)
 		CatAPI.getFact(id)
 			.then((result) => {
-				setFact(prevState => {
-					return {
-						...prevState,
-						next: result?.text || ""
-					};
-				})
+				setFact(result?.text || "")
 
 				if (result && result._id) {
 					window.history.replaceState(null, "", `/${result._id}`);
@@ -68,22 +61,9 @@ export default function Home({ params }: { params: { id: string } }) {
 		};
 	}, [spinnerRotation]);
 
-	useEffect(() => {
-		if (fact.next !== '') {
-			const timer = setTimeout(() => {
-				setFact({
-					current: fact.next,
-					next: ""
-				})
-			}, 500); // Corresponds to the animation time
-			return () => clearTimeout(timer);
-		}
-	}, [fact.next]);
-	
-
 	return (
 		<div className={'py-16 flex flex-col flex-grow'}>
-			<div className={"min-h-full flex-grow flex flex-col"}>
+			<div className={"min-h-full flex-grow flex flex-col overflow-hidden"}>
 				<div className={"pb-16"}>
 					<button className={"btn-primary flex mx-auto"} onClick={() => {
 						newFact();
@@ -92,10 +72,7 @@ export default function Home({ params }: { params: { id: string } }) {
 						<Refresh className={clsx("ml-2", spinnerRotation && "animate-spin")}/>
 					</button>
 				</div>
-				<div className={"text-slider"} ref={textContainer}>
-					{fact.current && <span className={clsx(fact.next && "text-out", "max-w-96 break-words text-xl leading-10")}>{fact.current}</span>}
-					{fact.next && <span className="text-in max-w-96 break-words text-xl leading-10">{fact.next}</span>}
-				</div>
+				<TextSlider text={fact} />
 			</div>
 		</div>
 	);
