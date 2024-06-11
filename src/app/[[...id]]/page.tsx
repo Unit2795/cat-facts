@@ -62,9 +62,11 @@ export default function Home({ params }: { params: { id: string } }) {
 	}, [spinnerRotation]);
 
 	return (
-		<div className={'py-16 flex flex-col flex-grow'}>
-			<div className={"text-center pb-16"}>
-				Welcome to your one stop shop for cool cat facts! Generate a new fact below, or <Link href={"/facts"} className={"text-blue-400 hover:text-blue-500 transition duration-200"} aria-label={"See a list of random cat facts"}>see a list of random facts by visiting the facts page.</Link>
+		<div className={'flex flex-col flex-grow'}>
+			<div className={"text-center w-full bg-black/20 min-h-32 mb-16 flex items-center justify-center shadow-lg"}>
+				<div>
+					Welcome to your one stop shop for cool cat facts! Generate a new fact below, or <Link href={"/facts"} className={"text-blue-400 hover:text-blue-500 transition duration-200"} aria-label={"See a list of random cat facts"}>see a list of random facts by visiting the facts page.</Link>
+				</div>
 			</div>
 			<div className={"min-h-full flex-grow flex flex-col overflow-hidden"}>
 				<div className={"pb-16"}>
