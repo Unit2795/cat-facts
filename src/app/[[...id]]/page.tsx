@@ -63,8 +63,8 @@ export default function Home({ params }: { params: { id: string } }) {
 
 	return (
 		<div className={'flex flex-col flex-grow'}>
-			<div className={"text-center w-full bg-black/20 min-h-32 mb-16 flex items-center justify-center shadow-lg"}>
-				<div>
+			<div className={"text-center w-full bg-rose-950/20 min-h-32 mb-16 flex items-center justify-center shadow-lg"}>
+				<div className={"px-12 max-w-2xl"}>
 					Welcome to your one stop shop for cool cat facts! Generate a new fact below, or <Link href={"/facts"} className={"text-blue-400 hover:text-blue-500 transition duration-200"} aria-label={"See a list of random cat facts"}>see a list of random facts by visiting the facts page.</Link>
 				</div>
 			</div>
