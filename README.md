@@ -27,10 +27,21 @@ bun dev
 ```
 
 ## API Endpoints
-- /fact - returns a random cat fact
-- /fact?id=ID - returns a specific cat fact by ID
-- /facts - returns multiple cat facts
-- /facts?amount=amount - returns multiple cat facts with a set amount
+- /api/v1/fact - returns a random cat fact
+- /api/v1/fact?id=ID - returns a specific cat fact by ID
+- /api/v1/facts - returns multiple cat facts
+- /api/v1/facts?amount=amount - returns multiple cat facts with a set amount
+
+### Example Response
+The response will either be a single object or an array of objects, depending on the endpoint.
+```
+{
+  "data": {
+    "_id": 193,
+    "text": "The Japanese Bobtail's tail resembles a rabbit's tail."
+  }
+}
+```
 
 
 ## Images
